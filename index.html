@@ -1,0 +1,42 @@
+<!doctype HTML>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width", initial-scale="1.0">
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js" defer></script>
+</head>
+
+<body>
+    <div class="app">
+        <h1>Password Generator</h1>
+        <div class="password-display">
+            <input type="text" id="final-password" readonly>
+            <button><img id="refresh-btn" src="./icons/refresh.png"></button>
+        </div>
+        </div>
+        <div class="user-inputs">
+            <div class="slider">
+                <label for="length-slider">Password Length:</label>
+                <input type="range" id="length-slider" min="6" max="30" value="12">
+                <span id="length-value">12</span>
+            </div>
+            <div class="condition-checkbox">
+
+                <input type="checkbox" id="lower-checkbox" checked>
+                <label>Min. 1 Lowercase</label>
+
+                <input type="checkbox" id="upper-checkbox" checked>
+                <label>Min. 1 Uppercase</label>
+
+                <input type="checkbox" id="number-checkbox" checked>
+                <label>Min. 1 Number</label>
+
+                <input type="checkbox" id="special-checkbox" checked>
+                <label>Min. 1 Special character</label>
+                
+            </div>
+    </div>
+    
+</body>
