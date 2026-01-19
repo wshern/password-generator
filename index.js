@@ -20,35 +20,31 @@ function getSecureRandomNumber(max) {
     crypto.getRandomValues(array)
     return array[0] % max
 }
+/*
+ OLD WAY: Traditional function
+ checkBoxes.filter(function(cb) {
+     return cb.checked;
+ })
 
-function preventUncheckAll(checkbox) {
-    const checkedCount = checkBoxes.filter(cb => cb.checked).length
-    // OLD WAY: Traditional function
-    // checkBoxes.filter(function(cb) {
-    //     return cb.checked;
-    // })
 
-    /* to count manually how many checkboxes are checked 
-    let checkedCount = 0;
-    for (let i = 0; i < checkBoxes.length; i++) {
-    let currentCheckbox = checkBoxes[i];
-    if (currentCheckbox.checked === true) {
-        checkedCount++;
-    }
-    */
-    if (checkedCount === 0) {
-        checkbox.checked = true
-        return
-    }
-    generatePassword()
+to count manually how many checkboxes are checked :
+
+let checkedCount = 0;
+for (let i = 0; i < checkBoxes.length; i++) {
+let currentCheckbox = checkBoxes[i];
+if (currentCheckbox.checked === true) {
+    checkedCount++;
 }
+*/
 
 checkBoxes.forEach(checkbox => {
-    checkbox.addEventListener('change', function () {
-        let allowGenerate = preventUncheckAll(checkbox)
-        if (allowGenerate) {
-            generatePassword()
+    checkbox.addEventListener('change', function() {
+        const checkedCount = checkBoxes.filter(checkbox => checkbox.checked).length
+        if (checkedCount === 0) {
+            checkbox.checked = true
+            return
         }
+        generatePassword()
     })
 })
 
