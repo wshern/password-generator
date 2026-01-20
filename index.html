@@ -3,14 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width", initial-scale="1.0">
-    <title>Password Generator</title>
+    <title>Random Password Generator</title>
     <link rel="stylesheet" href="style.css">
     <script src="index.js" defer></script>
 </head>
 
 <body>
     <div class="app">
-        <h1>Password Generator</h1>
+        <div class="app-content">
+        <h1>Random Password Generator</h1>
         <div class="password-display">
             <input type="text" id="final-password" readonly>
             <button id="refresh-btn"><img id="refresh-img" src="./icons/refresh.png"></button>
@@ -24,18 +25,19 @@
             <div class="condition-checkbox">
 
                 <input type="checkbox" id="lower-checkbox" checked>
-                <label>Min. 1 Lowercase</label>
+                <label>abc</label>
 
                 <input type="checkbox" id="upper-checkbox" checked>
-                <label>Min. 1 Uppercase</label>
+                <label>ABC</label>
 
                 <input type="checkbox" id="number-checkbox" checked>
-                <label>Min. 1 Number</label>
+                <label>123</label>
 
                 <input type="checkbox" id="special-checkbox" checked>
-                <label>Min. 1 Special character</label>
+                <label>#$&</label>
             </div>
         </div>
+    </div>
     </div>
     
 </body>
