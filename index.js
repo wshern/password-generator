@@ -120,8 +120,17 @@ refreshBtn.addEventListener('click', generatePassword)
 
 finalPassword.addEventListener('click', function () {
     navigator.clipboard.writeText(finalPassword.value)
-    alert('Password copied to clipboard!')
-})
+    const copiedTooltip = document.getElementById('copied-tooltip')
+
+    copiedTooltip.style.left = event.pageX + 15 + 'px'
+    copiedTooltip.style.top = event.pageY - 30 + 'px'
+    copiedTooltip.classList.add('show')
+
+    setTimeout(() => {
+        copiedTooltip.classList.remove('show')
+    }, 800)
+    
+});
 
 
 // Generate password on initial load

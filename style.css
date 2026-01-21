@@ -23,6 +23,32 @@ body {
     gap: 20px;
 }
 
+#copied-tooltip {
+    position: fixed;
+    visibility: hidden;
+    border: 2px solid black;
+    border-radius: 25px;
+    background: white;
+    padding: 5px 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
+    z-index: 1000;
+    pointer-events: none;
+    white-space: nowrap;
+
+
+}
+
+#copied-tooltip.show {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    
+}
+
 #final-password {
     width: 280px;
     height: 60px;
