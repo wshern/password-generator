@@ -1,12 +1,13 @@
 const lowercase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 const uppercase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-const numbers = ['0','1','2','3','4','5','6','7','8','9']
-const specialCharacters = ['!', '@','#','$','%','&','_','+','-','=','.', '?']
+const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+const specialCharacters = ['!', '@', '#', '$', '%', '&', '_', '+', '-', '=', '.', '?']
 
-let lowerCheckbox = document.getElementById('lower-checkbox')
-let upperCheckbox = document.getElementById('upper-checkbox')
-let numberCheckbox = document.getElementById('number-checkbox')
-let specialCheckbox = document.getElementById('special-checkbox')
+const lowerCheckbox = document.getElementById('lower-checkbox')
+const upperCheckbox = document.getElementById('upper-checkbox')
+const numberCheckbox = document.getElementById('number-checkbox')
+const specialCheckbox = document.getElementById('special-checkbox')
+const checkBoxes = [lowerCheckbox, upperCheckbox, numberCheckbox, specialCheckbox]
 
 const lengthSlider = document.getElementById('length-slider')
 const lengthValue = document.getElementById('length-value')
@@ -14,83 +15,123 @@ const finalPassword = document.getElementById('final-password')
 const refreshBtn = document.getElementById('refresh-btn')
 
 
+function getSecureRandomNumber(max) {
+    const array = new Uint32Array(1);
+    crypto.getRandomValues(array)
+    return array[0] % max
+}
+/*
+ OLD WAY: Traditional function
+ checkBoxes.filter(function(cb) {
+     return cb.checked;
+ })
+
+
+to count manually how many checkboxes are checked :
+
+let checkedCount = 0;
+for (let i = 0; i < checkBoxes.length; i++) {
+let currentCheckbox = checkBoxes[i];
+if (currentCheckbox.checked === true) {
+    checkedCount++;
+}
+*/
+
+checkBoxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        const checkedCount = checkBoxes.filter(checkbox => checkbox.checked).length
+        if (checkedCount === 0) {
+            checkbox.checked = true
+            return
+        }
+        generatePassword()
+    })
+})
 
 function generatePassword() {
     const passwordLength = Number(lengthSlider.value)
-    let requiredTypes = []
     let passwordCharacters = []
     let characterPool = []
     let includedTypes = []
+    let requiredTypes = []
 
 
     if (lowerCheckbox.checked) {
         requiredTypes.push('lowercase')
-        let lowerChar = lowercase[Math.floor(Math.random() * lowercase.length)]
+        let lowerChar = lowercase[getSecureRandomNumber(lowercase.length)]
         passwordCharacters.push(lowerChar)
         includedTypes.push(...lowercase)
     }
 
     if (upperCheckbox.checked) {
         requiredTypes.push('uppercase')
-        let upperChar = uppercase[Math.floor(Math.random() * uppercase.length)]
+        let upperChar = uppercase[getSecureRandomNumber(uppercase.length)]
         passwordCharacters.push(upperChar)
         includedTypes.push(...uppercase)
     }
-    
+
     if (numberCheckbox.checked) {
         requiredTypes.push('numbers')
-        let numberChar = numbers[Math.floor(Math.random() * numbers.length)]
+        let numberChar = numbers[getSecureRandomNumber(numbers.length)]
         passwordCharacters.push(numberChar)
         includedTypes.push(...numbers)
     }
 
     if (specialCheckbox.checked) {
         requiredTypes.push('specialCharacters')
-        let specialChar = specialCharacters[Math.floor(Math.random() * specialCharacters.length)]
+        let specialChar = specialCharacters[getSecureRandomNumber(specialCharacters.length)]
         passwordCharacters.push(specialChar)
         includedTypes.push(...specialCharacters)
-    }
-
-    if (requiredTypes.length === 0) {
-        alert('Please select at least 1 character type.')
-        return
     }
 
     characterPool.push(...includedTypes)
 
     while (passwordCharacters.length < passwordLength) {
-        let randomChar = characterPool[Math.floor(Math.random() * characterPool.length)]
+        let randomChar = characterPool[getSecureRandomNumber(characterPool.length)]
         passwordCharacters.push(randomChar)
     }
-
-    function shufflePassword(arr) {
-        for (let i = (arr.length - 1); i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1))
-
-            let temp = arr[i]
-            arr[i] = arr[j]
-            arr[j] = temp
-
-            // modern swap method:
-            // [arr[i], arr[j]] = [arr[j], arr[i]]
-
-        }       
-    }    
 
     shufflePassword(passwordCharacters)
     finalPassword.value = passwordCharacters.join('')
 
 }
 
+function shufflePassword(arr) {
+    for (let i = (arr.length - 1); i > 0; i--) {
+        let j = getSecureRandomNumber(i + 1)
+
+        let temp = arr[i]
+        arr[i] = arr[j]
+        arr[j] = temp
+
+        // modern swap method:
+        // [arr[i], arr[j]] = [arr[j], arr[i]]
+
+    }
+}
 
 
-
-lengthSlider.addEventListener('input', function() {
+lengthSlider.addEventListener('input', function () {
     lengthValue.textContent = lengthSlider.value
     generatePassword()
 })
 
 refreshBtn.addEventListener('click', generatePassword)
+
+finalPassword.addEventListener('click', function (event) {
+    navigator.clipboard.writeText(finalPassword.value)
+    const copiedTooltip = document.getElementById('copied-tooltip')
+
+    copiedTooltip.style.left = event.pageX + 15 + 'px'
+    copiedTooltip.style.top = event.pageY - 30 + 'px'
+    copiedTooltip.classList.add('show')
+
+    setTimeout(() => {
+        copiedTooltip.classList.remove('show')
+    }, 800)
+    
+});
+
 
 // Generate password on initial load
 generatePassword()
