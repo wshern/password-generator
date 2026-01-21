@@ -50,10 +50,10 @@ checkBoxes.forEach(checkbox => {
 
 function generatePassword() {
     const passwordLength = Number(lengthSlider.value)
-    let requiredTypes = []
     let passwordCharacters = []
     let characterPool = []
     let includedTypes = []
+    let requiredTypes = []
 
 
     if (lowerCheckbox.checked) {
@@ -118,7 +118,7 @@ lengthSlider.addEventListener('input', function () {
 
 refreshBtn.addEventListener('click', generatePassword)
 
-finalPassword.addEventListener('click', function () {
+finalPassword.addEventListener('click', function (event) {
     navigator.clipboard.writeText(finalPassword.value)
     const copiedTooltip = document.getElementById('copied-tooltip')
 

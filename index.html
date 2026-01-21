@@ -1,44 +1,45 @@
-<!doctype HTML>
+<!doctype html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width", initial-scale="1.0">
-    <title>Random Password Generator</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="index.js" defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" , initial-scale="1.0" />
+  <title>Random Password Generator</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="index.js" defer></script>
 </head>
 
 <body>
-    <div class="app">
-        <div class="app-content">
-        <h1>Random Password Generator</h1>
-        <div class="password-display">
-            <input type="text" id="final-password" readonly>
-            <span id="copied-tooltip">Copied!</span>
-            <button id="refresh-btn"><img id="refresh-img" src="./icons/refresh.png"></button>
+  <div class="app">
+    <div class="app-content">
+      <h1>Random Password Generator</h1>
+      <div class="password-display">
+        <input type="text" id="final-password" readonly />
+        <span id="copied-tooltip">Copied!</span>
+        <button id="refresh-btn">
+          <img id="refresh-img" src="./icons/refresh.png" />
+        </button>
+      </div>
+      <div class="user-inputs">
+        <div class="slider">
+          <label for="length-slider"
+            >Password Length:<span id="length-value">12</span></label
+          >
+          <input type="range" id="length-slider" min="6" max="30" value="12" />
         </div>
-        <div class="user-inputs">
-            <div class="slider">
-                <label for="length-slider">Password Length:<span id="length-value">12</span></label>
-                <input type="range" id="length-slider" min="6" max="30" value="12">
-                
-            </div>
-            <div class="condition-checkbox">
+        <div id="condition-checkbox">
+          <input type="checkbox" id="lower-checkbox" checked />
+          <label for="lower-checkbox">abc</label>
 
-                <input type="checkbox" id="lower-checkbox" checked>
-                <label for="lower-checkbox">abc</label>
+          <input type="checkbox" id="upper-checkbox" checked />
+          <label for="upper-checkbox">ABC</label>
 
-                <input type="checkbox" id="upper-checkbox" checked>
-                <label for="upper-checkbox">ABC</label>
+          <input type="checkbox" id="number-checkbox" checked />
+          <label for="number-checkbox">123</label>
 
-                <input type="checkbox" id="number-checkbox" checked>
-                <label for="number-checkbox">123</label>
-
-                <input type="checkbox" id="special-checkbox" checked>
-                <label for="special-checkbox">#$&</label>
-            </div>
+          <input type="checkbox" id="special-checkbox" checked />
+          <label for="special-checkbox">#$&</label>
         </div>
+      </div>
     </div>
-    </div>
-    
+  </div>
 </body>
