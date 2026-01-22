@@ -114,6 +114,10 @@ body {
 #condition-checkbox {
     margin: 30px 0;
     font-size: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
 }
 
 #condition-checkbox input[type='checkbox'] {
